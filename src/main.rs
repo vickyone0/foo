@@ -1,33 +1,32 @@
 struct Dog;
 struct Cat;
 
-trait Discription{
-    fn discribe(&self) -> String;
+pub trait Discription{
+    fn discribe() -> String;
 }
 
 impl Discription for Dog {
-    fn discribe(&self) -> String {
+    fn discribe() -> String {
         String::from("I am a dog")
     }
 }
 
 impl Discription for Cat {
-    fn discribe(&self) -> String {
+    fn discribe() -> String {
         String::from("I am a cat")
     }
 }
 
-fn drisction_type<T>(t: &T) -> String
-where
-    T: Discription,
+fn drisction_type<T:Discription>() -> String
 {
-    t.discribe()
+    T::discribe()
 }
 
 fn main() {
     let dog = Dog;
     let cat = Cat;
 
-    println!("{}", drisction_type(&dog));
-    println!("{}", drisction_type(&cat));
+    println!("{}", drisction_type::<Dog>());
+    println!("{}", drisction_type::<Cat>());
+    //println!("{}", drisction_type());
 }
