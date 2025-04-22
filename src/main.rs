@@ -1,43 +1,43 @@
-
-
-struct Labrador {}
-struct Retriever {}
-#[derive(Debug)]
-struct Poodle {}
-struct Dachshund {}
-
-use std::marker::PhantomData;
-
-#[derive(Debug)]
-struct Dog<Breed> {
-    name: String,
-    breed: PhantomData<Breed>,
+struct  Rectangle {
+    width: u32,
+    height: u32,
 }
 
-impl Dog<Labrador> {
-    fn barking(&self) {
-        println!("Woof! Woof!");
+struct Square {
+    side: u32,
+}
+
+trait Shape{
+    fn area(&self) -> u32;
+    fn perimeter(&self) -> u32;
+
+}
+
+impl Shape for Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    fn perimeter(&self) -> u32 {
+        2 * (self.width + self.height)
     }
 }
+impl Shape for Square {
+    fn area(&self) -> u32 {
+        self.side * self.side
+    }
 
-impl Dog<Retriever> {
-    fn bark(&self) {
-        println!("bovu bovu!");
+    fn perimeter(&self) -> u32 {
+        4 * self.side
     }
 }
 fn main() {
-let my_poodle: Dog<Poodle> = Dog {
-name: "Jeffrey".into(),
-breed: PhantomData,
-}; 
+    let rect = Rectangle { width: 10, height: 5 };
+    let square = Square { side: 4 };
 
-let my_laboror: Dog<Labrador> = Dog {
-    name: "Jeffrey".into(),
-    breed: PhantomData,
-    }; 
+    println!("Rectangle area: {}", rect.area());
+    println!("Rectangle perimeter: {}", rect.perimeter());
 
-    my_laboror.barking();
-
-
-    println!("My dog's name is {:?}", my_poodle);
+    println!("Square area: {}", square.area());
+    println!("Square perimeter: {}", square.perimeter());
 }
