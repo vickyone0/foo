@@ -1,43 +1,33 @@
-struct  Rectangle {
-    width: u32,
-    height: u32,
+struct Dog;
+struct Cat;
+
+trait Discription{
+    fn discribe(&self) -> String;
 }
 
-struct Square {
-    side: u32,
-}
-
-trait Shape{
-    fn area(&self) -> u32;
-    fn perimeter(&self) -> u32;
-
-}
-
-impl Shape for Rectangle {
-    fn area(&self) -> u32 {
-        self.width * self.height
-    }
-
-    fn perimeter(&self) -> u32 {
-        2 * (self.width + self.height)
+impl Discription for Dog {
+    fn discribe(&self) -> String {
+        String::from("I am a dog")
     }
 }
-impl Shape for Square {
-    fn area(&self) -> u32 {
-        self.side * self.side
-    }
 
-    fn perimeter(&self) -> u32 {
-        4 * self.side
+impl Discription for Cat {
+    fn discribe(&self) -> String {
+        String::from("I am a cat")
     }
 }
+
+fn drisction_type<T>(t: &T) -> String
+where
+    T: Discription,
+{
+    t.discribe()
+}
+
 fn main() {
-    let rect = Rectangle { width: 10, height: 5 };
-    let square = Square { side: 4 };
+    let dog = Dog;
+    let cat = Cat;
 
-    println!("Rectangle area: {}", rect.area());
-    println!("Rectangle perimeter: {}", rect.perimeter());
-
-    println!("Square area: {}", square.area());
-    println!("Square perimeter: {}", square.perimeter());
+    println!("{}", drisction_type(&dog));
+    println!("{}", drisction_type(&cat));
 }
